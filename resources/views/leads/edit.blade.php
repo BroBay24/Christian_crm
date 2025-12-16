@@ -126,9 +126,7 @@
                             </a>
                             <button type="submit" 
                                     class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded transition duration-150 shadow-lg hover:shadow-xl">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
+                                
                                 Simpan Perubahan
                             </button>
                         </div>

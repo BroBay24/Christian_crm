@@ -95,6 +95,10 @@
                                                    class="text-indigo-600 hover:text-indigo-900">
                                                     Edit
                                                 </a>
+                                                <a href="{{ route('leads.create') }}" 
+                                                   class="text-green-600 hover:text-green-900">
+                                                    + Tambah Baru
+                                                </a>
                                             @endif
 
                                             {{-- Manager bisa approve/reject dan hapus --}}
