@@ -97,7 +97,7 @@
                                                         Edit
                                                     </a>
                                                     <a href="{{ route('leads.create') }}" 
-                                                       class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow">
+                                                       class="bg-blue-600  text-white font-semibold py-1 px-3 rounded shadow">
                                                         + Tambah Baru
                                                     </a>
                                                 </div>
