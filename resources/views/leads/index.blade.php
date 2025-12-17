@@ -5,7 +5,7 @@
                 {{ __('Daftar Lead') }}
             </h2>
             <a href="{{ route('leads.create') }}" 
-               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+               class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
                 + Tambah Lead
             </a>
         </div>
@@ -88,61 +88,65 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $lead->creator->name }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             {{-- Sales hanya bisa edit lead milik sendiri --}}
                                             @if (auth()->user()->isSales())
-                                                <a href="{{ route('leads.edit', $lead) }}" 
-                                                   class="text-indigo-600 hover:text-indigo-900">
-                                                    Edit
-                                                </a>
-                                                <a href="{{ route('leads.create') }}" 
-                                                   class="text-green-600 hover:text-green-900">
-                                                    + Tambah Baru
-                                                </a>
+                                                <div class="flex items-center gap-2">
+                                                    <a href="{{ route('leads.edit', $lead) }}" 
+                                                       class="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
+                                                        Edit
+                                                    </a>
+                                                    <a href="{{ route('leads.create') }}" 
+                                                       class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow">
+                                                        + Tambah Baru
+                                                    </a>
+                                                </div>
                                             @endif
 
                                             {{-- Manager bisa approve/reject dan hapus --}}
                                             @if (auth()->user()->isManager())
-                                                <a href="{{ route('leads.edit', $lead) }}" 
-                                                   class="text-indigo-600 hover:text-indigo-900">
-                                                    Edit
-                                                </a>
+                                                <div class="flex items-center gap-2">
+                                                    <a href="{{ route('leads.edit', $lead) }}" 
+                                                       class="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
+                                                        Edit
+                                                    </a>
 
-                                                @if ($lead->status === 'new')
-                                                    <form action="{{ route('leads.approve', $lead) }}" 
+                                                    @if ($lead->status === 'new')
+                                                        <form action="{{ route('leads.approve', $lead) }}" 
+                                                              method="POST" 
+                                                              class="inline-block">
+                                                            @csrf
+                                                            <button type="submit" 
+                                                                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                    onclick="return confirm('Approve lead ini?')">
+                                                                Approve
+                                                            </button>
+                                                        </form>
+
+                                                        <form action="{{ route('leads.reject', $lead) }}" 
+                                                              method="POST" 
+                                                              class="inline-block">
+                                                            @csrf
+                                                            <button type="submit" 
+                                                                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                    onclick="return confirm('Reject lead ini?')">
+                                                                Reject
+                                                            </button>
+                                                        </form>
+                                                    @endif
+
+                                                    <form action="{{ route('leads.destroy', $lead) }}" 
                                                           method="POST" 
-                                                          class="inline">
+                                                          class="inline-block">
                                                         @csrf
+                                                        @method('DELETE')
                                                         <button type="submit" 
-                                                                class="text-green-600 hover:text-green-900"
-                                                                onclick="return confirm('Approve lead ini?')">
-                                                            Approve
+                                                                class="bg-red-600  text-white font-semibold py-1 px-3 rounded shadow"
+                                                                onclick="return confirm('Yakin hapus lead ini?')">
+                                                            Hapus
                                                         </button>
                                                     </form>
-
-                                                    <form action="{{ route('leads.reject', $lead) }}" 
-                                                          method="POST" 
-                                                          class="inline">
-                                                        @csrf
-                                                        <button type="submit" 
-                                                                class="text-red-600 hover:text-red-900"
-                                                                onclick="return confirm('Reject lead ini?')">
-                                                            Reject
-                                                        </button>
-                                                    </form>
-                                                @endif
-
-                                                <form action="{{ route('leads.destroy', $lead) }}" 
-                                                      method="POST" 
-                                                      class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" 
-                                                            class="text-red-600 hover:text-red-900"
-                                                            onclick="return confirm('Yakin hapus lead ini?')">
-                                                        Hapus
-                                                    </button>
-                                                </form>
+                                                </div>
                                             @endif
                                         </td>
                                     </tr>

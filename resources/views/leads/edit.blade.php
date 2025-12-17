@@ -125,7 +125,7 @@
                                 Batal
                             </a>
                             <button type="submit" 
-                                    class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded transition duration-150 shadow-lg hover:shadow-xl">
+                                    class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-black font-bold py-3 px-6 rounded transition duration-150 shadow-lg hover:shadow-xl">
                                 
                                 Simpan Perubahan
                             </button>

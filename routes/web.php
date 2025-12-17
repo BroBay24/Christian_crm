@@ -4,6 +4,8 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +40,14 @@ Route::middleware('auth')->group(function () {
     
     // Route untuk konversi project ke customer (khusus manager)
     Route::post('customers/convert/{project}', [CustomerController::class, 'convertFromProject'])->name('customers.convert');
+
+    // CRUD Product - Resource Route (khusus manager)
+    Route::resource('products', ProductController::class);
+
+    // Customer-Product Assignment Routes (khusus manager)
+    Route::get('customers/{customer}/products/create', [CustomerProductController::class, 'create'])->name('customers.products.create');
+    Route::post('customers/{customer}/products', [CustomerProductController::class, 'store'])->name('customers.products.store');
+    Route::delete('customers/{customer}/products/{product}', [CustomerProductController::class, 'destroy'])->name('customers.products.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('customer_products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->date('start_date'); // Tanggal mulai langganan
+            $table->date('end_date')->nullable(); // Tanggal berakhir langganan (null = aktif)
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

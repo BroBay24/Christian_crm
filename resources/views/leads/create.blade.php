@@ -86,13 +86,11 @@
                         <div class="flex items-center justify-between mt-6">
                             <a href="{{ route('leads.index') }}" 
                                class="inline-flex items-center bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded transition duration-150">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                                </svg>
+                                
                                 Batal
                             </a>
                             <button type="submit" 
-                                    class="inline-flex items-center bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded transition duration-150 shadow-lg hover:shadow-xl">
+                                    class="inline-flex items-center bg-green-500 hover:bg-green-700 text-black font-bold py-3 px-6 rounded transition duration-150 shadow-lg hover:shadow-xl">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>

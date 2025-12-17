@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name'); // Nama produk (e.g., Paket 100Mbps)
+            $table->text('description')->nullable(); // Deskripsi produk
+            $table->decimal('price', 15, 2); // Harga per bulan
+            $table->string('speed')->nullable(); // Kecepatan (100Mbps, 1Gbps)
             $table->timestamps();
         });
     }

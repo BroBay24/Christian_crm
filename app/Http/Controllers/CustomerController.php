@@ -90,7 +90,15 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = Auth::user();
+        
+        if (!$user->isManager()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $customer = Customer::with(['lead', 'products'])->findOrFail($id);
+
+        return view('customers.show', compact('customer'));
     }
 
     /**

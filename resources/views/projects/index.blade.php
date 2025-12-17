@@ -96,46 +96,48 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $project->approved_date?->format('d/m/Y') ?? '-' }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                            @if ($project->status === 'pending')
-                                                <form action="{{ route('projects.approve', $project) }}" method="POST" class="inline">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <div class="flex items-center gap-2">
+                                                @if ($project->status === 'pending')
+                                                    <form action="{{ route('projects.approve', $project) }}" method="POST" class="inline-block">
+                                                        @csrf
+                                                        <button type="submit" 
+                                                                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                onclick="return confirm('Approve project ini?')">
+                                                            Approve
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ route('projects.reject', $project) }}" method="POST" class="inline-block">
+                                                        @csrf
+                                                        <button type="submit" 
+                                                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                onclick="return confirm('Reject project ini?')">
+                                                            Reject
+                                                        </button>
+                                                    </form>
+                                                @elseif ($project->status === 'approved' && !$project->customer)
+                                                    <form action="{{ route('customers.convert', $project) }}" method="POST" class="inline-block">
+                                                        @csrf
+                                                        <button type="submit" 
+                                                                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                onclick="return confirm('Konversi project ini ke customer?')">
+                                                            → Customer
+                                                        </button>
+                                                    </form>
+                                                @elseif ($project->customer)
+                                                    <span class="text-gray-500 text-xs">Sudah jadi Customer</span>
+                                                @endif
+                                                
+                                                <form action="{{ route('projects.destroy', $project) }}" method="POST" class="inline-block">
                                                     @csrf
+                                                    @method('DELETE')
                                                     <button type="submit" 
-                                                            class="text-green-600 hover:text-green-900"
-                                                            onclick="return confirm('Approve project ini?')">
-                                                        Approve
+                                                            class="bg-red-600  text-white font-semibold py-1 px-3 rounded shadow"
+                                                            onclick="return confirm('Hapus project ini?')">
+                                                        Hapus
                                                     </button>
                                                 </form>
-                                                <form action="{{ route('projects.reject', $project) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    <button type="submit" 
-                                                            class="text-red-600 hover:text-red-900"
-                                                            onclick="return confirm('Reject project ini?')">
-                                                        Reject
-                                                    </button>
-                                                </form>
-                                            @elseif ($project->status === 'approved' && !$project->customer)
-                                                <form action="{{ route('customers.convert', $project) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    <button type="submit" 
-                                                            class="text-blue-600 hover:text-blue-900"
-                                                            onclick="return confirm('Konversi project ini ke customer?')">
-                                                        → Customer
-                                                    </button>
-                                                </form>
-                                            @elseif ($project->customer)
-                                                <span class="text-gray-500 text-xs">Sudah jadi Customer</span>
-                                            @endif
-                                            
-                                            <form action="{{ route('projects.destroy', $project) }}" method="POST" class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" 
-                                                        class="text-gray-600 hover:text-gray-900"
-                                                        onclick="return confirm('Hapus project ini?')">
-                                                    Hapus
-                                                </button>
-                                            </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty

@@ -2,14 +2,14 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Daftar Customer') }}
+                {{ __('Daftar Produk Internet') }}
             </h2>
-            <a href="{{ route('customers.create') }}" 
+            <a href="{{ route('products.create') }}" 
                class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded inline-flex items-center">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
-                Tambah Customer
+                Tambah Produk
             </a>
         </div>
     </x-slot>
@@ -33,22 +33,16 @@
                                         No
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Nama
+                                        Nama Produk
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Perusahaan
+                                        Kecepatan
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Email
+                                        Harga/Bulan
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Telepon
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Tanggal Mulai
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
+                                        Deskripsi
                                     </th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Aksi
@@ -56,53 +50,35 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @forelse ($customers as $index => $customer)
+                                @forelse ($products as $index => $product)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $customers->firstItem() + $index }}
+                                            {{ $products->firstItem() + $index }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
+                                            {{ $product->name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            {{ $product->speed ?? '-' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $customer->lead->name }}
+                                            Rp {{ number_format($product->price, 0, ',', '.') }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $customer->lead->company ?? '-' }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $customer->lead->email }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $customer->lead->phone }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {{ $customer->start_date->format('d/m/Y') }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @if ($customer->status === 'active')
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                    Active
-                                                </span>
-                                            @else
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                                    Inactive
-                                                </span>
-                                            @endif
+                                        <td class="px-6 py-4 text-sm text-gray-500">
+                                            {{ Str::limit($product->description, 50) ?? '-' }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div class="flex items-center gap-2">
-                                                <a href="{{ route('customers.show', $customer) }}" 
-                                                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded shadow">
-                                                    Detail
-                                                </a>
-                                                <a href="{{ route('customers.edit', $customer) }}" 
-                                                   class="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-4 rounded shadow">
+                                                <a href="{{ route('products.edit', $product) }}" 
+                                                   class="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
                                                     Edit
                                                 </a>
-                                                <form action="{{ route('customers.destroy', $customer) }}" method="POST" class="inline-block">
+                                                <form action="{{ route('products.destroy', $product) }}" method="POST" class="inline-block">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" 
-                                                            class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded shadow"
-                                                            onclick="return confirm('Hapus customer ini?')">
+                                                            class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                            onclick="return confirm('Hapus produk ini?')">
                                                         Hapus
                                                     </button>
                                                 </form>
@@ -111,8 +87,8 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="px-6 py-4 text-center text-sm text-gray-500">
-                                            Tidak ada customer.
+                                        <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                            Tidak ada produk. <a href="{{ route('products.create') }}" class="text-blue-600 hover:text-blue-900">Tambah produk pertama</a>
                                         </td>
                                     </tr>
                                 @endforelse
@@ -122,7 +98,7 @@
 
                     {{-- Pagination --}}
                     <div class="mt-4">
-                        {{ $customers->links() }}
+                        {{ $products->links() }}
                     </div>
                 </div>
             </div>

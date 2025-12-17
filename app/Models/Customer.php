@@ -26,6 +26,7 @@ class Customer extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'customer_products')
+            ->withPivot('start_date', 'end_date', 'status')
             ->withTimestamps();
     }
 
