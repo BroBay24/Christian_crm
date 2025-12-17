@@ -102,7 +102,7 @@
                                                     <form action="{{ route('projects.approve', $project) }}" method="POST" class="inline-block">
                                                         @csrf
                                                         <button type="submit" 
-                                                                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                class="bg-green-600 hover:bg-green-700 text-black font-semibold py-1 px-3 rounded shadow"
                                                                 onclick="return confirm('Approve project ini?')">
                                                             Approve
                                                         </button>

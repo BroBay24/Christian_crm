@@ -71,7 +71,7 @@
                                 Buat Customer
                             </button>
                             <a href="{{ route('customers.index') }}" 
-                               class="bg-gray-500 hover:bg-gray-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                               class="bg-white-500 hover:bg-white-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                 Batal
                             </a>
                         </div>

@@ -107,7 +107,7 @@
                                             @if (auth()->user()->isManager())
                                                 <div class="flex items-center gap-2">
                                                     <a href="{{ route('leads.edit', $lead) }}" 
-                                                       class="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
+                                                       class="inline-block bg-yellow-500 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
                                                         Edit
                                                     </a>
 
@@ -117,7 +117,7 @@
                                                               class="inline-block">
                                                             @csrf
                                                             <button type="submit" 
-                                                                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                    class="bg-green-600 hover:bg-green-700 text-black font-semibold py-1 px-3 rounded shadow"
                                                                     onclick="return confirm('Approve lead ini?')">
                                                                 Approve
                                                             </button>
