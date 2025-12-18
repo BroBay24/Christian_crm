@@ -1,59 +1,757 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+GitHub Copilot: 
+```markdown
+#  CRM PT. Smart - Sales Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Customer Relationship Management (CRM) untuk mengelola proses Sales dari Lead hingga Customer dengan assignment produk internet.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Daftar Isi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Tentang Aplikasi](#-tentang-aplikasi)
+- [Fitur Utama](#-fitur-utama)
+- [Tech Stack](#-tech-stack)
+- [Database Schema (ERD)](#-database-schema-erd)
+- [Role & Permissions](#-role--permissions)
+- [Workflow Bisnis](#-workflow-bisnis)
+- [Instalasi](#-instalasi)
+- [Konfigurasi](#-konfigurasi)
+- [User Testing](#-user-testing)
+- [Struktur MVC](#-struktur-mvc)
+- [Database Relations](#-database-relations)
+- [Security Features](#-security-features)
+- [API Endpoints](#-api-endpoints)
+- [Screenshots](#-screenshots)
+- [Troubleshooting](#-troubleshooting)
+- [Future Development](#-future-development)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Tentang Aplikasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+**CRM PT. Smart** adalah aplikasi web untuk divisi Sales yang mengelola proses:
+- **Lead Management**: Sales menginput calon customer
+- **Project Management**: Manager meng-approve lead menjadi project
+- **Customer Management**: Project approved dikonversi menjadi customer aktif
+- **Product Assignment**: Assign paket internet ke customer
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Kenapa Aplikasi Ini Dibuat?
 
-## Laravel Sponsors
+**Problem:**
+- Tracking lead masih manual (Excel)
+- Tidak ada sistem approval terstruktur
+- Sulit tracking produk yang digunakan customer
+- Tidak ada pembagian role Sales vs Manager
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+**Solution:**
+- Web-based CRM dengan role management
+- Approval workflow otomatis
+- Database relasional untuk tracking lengkap
+- UI modern dan user-friendly
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+##  Fitur Utama
 
-## Contributing
+### **Role Sales**
+- ✅ Tambah lead baru (auto created_by & status "new")
+- ✅ Edit lead milik sendiri
+- ✅ Monitoring semua lead (read-only)
+- ❌ Tidak bisa approve/reject/hapus
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+###  **Role Manager**
+- ✅ Approve/Reject lead
+- ✅ Buat project dari lead approved
+- ✅ Approve project → Convert to customer
+- ✅ CRUD Products (paket internet)
+- ✅ Assign produk ke customer (many-to-many)
+- ✅ Edit & hapus semua data
 
-## Code of Conduct
+### **Authentication & Authorization**
+- Login/Register via Laravel Breeze
+- Session-based authentication
+- Role-based access control
+- CSRF protection
+- Password hashing (bcrypt)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Tech Stack
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Layer | Technology | Version |
+|-------|-----------|---------|
+| **Backend** | Laravel | 12.x |
+| **Frontend** | Blade Template | - |
+| **CSS Framework** | Tailwind CSS | 3.x |
+| **Database** | MySQL | 8.x |
+| **Authentication** | Laravel Breeze | 2.x |
+| **Server** | PHP | 8.2+ |
+| **Package Manager** | Composer | 2.x |
+| **Asset Bundler** | Vite | 5.x |
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+##  Database Schema (ERD)
+
+```mermaid
+erDiagram
+    USERS {
+        bigint id PK
+        string name
+        string email
+        string password
+        string role "sales | manager"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    LEADS {
+        bigint id PK
+        string name
+        string company
+        string phone
+        string email
+        string status "new | approved | rejected"
+        bigint created_by FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PRODUCTS {
+        bigint id PK
+        string name
+        string speed
+        decimal price
+        text description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PROJECTS {
+        bigint id PK
+        bigint lead_id FK
+        bigint approved_by FK
+        string status "pending | approved | rejected"
+        date approved_date
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CUSTOMERS {
+        bigint id PK
+        bigint lead_id FK
+        date start_date
+        string status "active | inactive"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CUSTOMER_PRODUCTS {
+        bigint id PK
+        bigint customer_id FK
+        bigint product_id FK
+        date start_date
+        date end_date
+        string status "active | inactive"
+        timestamp created_at
+    }
+
+    USERS ||--o{ LEADS : "creates"
+    USERS ||--o{ PROJECTS : "approves"
+    LEADS ||--o| PROJECTS : "processed in"
+    LEADS ||--o| CUSTOMERS : "converted to"
+    CUSTOMERS ||--o{ CUSTOMER_PRODUCTS : "has"
+    PRODUCTS ||--o{ CUSTOMER_PRODUCTS : "used in"
+```
+
+### **Penjelasan Relasi:**
+
+| Relasi | Tipe | Keterangan |
+|--------|------|------------|
+| `users → leads` | One-to-Many | 1 sales buat banyak lead |
+| `users → projects` | One-to-Many | 1 manager approve banyak project |
+| `leads → projects` | One-to-One | 1 lead = 1 project |
+| `leads → customers` | One-to-One | 1 lead converted = 1 customer |
+| `customers ↔ products` | Many-to-Many | 1 customer bisa punya banyak produk |
+
+---
+
+##  Role & Permissions
+
+### **Matrix Akses:**
+
+| Fitur | Sales | Manager |
+|-------|:-----:|:-------:|
+| **Leads** |
+| Lihat semua lead | ✅ | ✅ |
+| Tambah lead | ✅ | ✅ |
+| Edit lead sendiri | ✅ | - |
+| Edit semua lead | ❌ | ✅ |
+| Approve/Reject lead | ❌ | ✅ |
+| Hapus lead | ❌ | ✅ |
+| **Projects** |
+| Lihat project | ❌ | ✅ |
+| Buat project | ❌ | ✅ |
+| Approve project | ❌ | ✅ |
+| Convert to customer | ❌ | ✅ |
+| **Customers** |
+| Lihat customer | ❌ | ✅ |
+| Buat customer | ❌ | ✅ |
+| Edit customer | ❌ | ✅ |
+| Assign produk | ❌ | ✅ |
+| **Products** |
+| Lihat produk | ❌ | ✅ |
+| CRUD produk | ❌ | ✅ |
+
+---
+
+##  Workflow Bisnis
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    WORKFLOW CRM PT. SMART                     │
+└──────────────────────────────────────────────────────────────┘
+
+ SALES INPUT LEAD
+   ├─ Nama: PT. ABC
+   ├─ Company: PT. ABC Indonesia
+   ├─ Phone: 08123456789
+   ├─ Email: info@abc.com
+   ├─ Status: new (auto)
+   └─ Created By: sales@smart.com (auto)
+          │
+          ▼
+ MANAGER REVIEW LEAD
+   ├─ ✅ Approve → Status: approved
+   └─ ❌ Reject → Status: rejected
+          │
+          ▼ (jika approved)
+MANAGER BUAT PROJECT
+   ├─ Pilih Lead: PT. ABC
+   ├─ Status: pending (auto)
+   └─ Approved By: manager@smart.com (auto)
+          │
+          ▼
+MANAGER APPROVE PROJECT
+   ├─ Status: approved
+   └─ Approved Date: 17/12/2025
+          │
+          ▼
+CONVERT TO CUSTOMER
+   ├─ Lead ID: #1 (PT. ABC)
+   ├─ Start Date: 17/12/2025
+   └─ Status: active
+          │
+          ▼
+ ASSIGN PRODUK
+   ├─ Customer: PT. ABC
+   ├─ Product: Paket 100Mbps
+   ├─ Price: Rp 300.000
+   ├─ Start Date: 17/12/2025
+   └─ Status: active
+```
+
+---
+
+## Instalasi
+
+### **Prasyarat:**
+- PHP >= 8.2
+- Composer >= 2.x
+- MySQL >= 8.x
+- Node.js >= 18.x (untuk Vite)
+- Git
+
+### **Step-by-Step:**
+
+#### 1. Clone Repository
+```bash
+git clone https://github.com/username/crm-pt-smart.git
+cd crm-pt-smart
+```
+
+#### 2. Install Dependencies
+```bash
+# PHP dependencies
+composer install
+
+# JavaScript dependencies
+npm install
+```
+
+#### 3. Setup Environment
+```bash
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+```
+
+#### 4. Konfigurasi Database
+Edit file .env:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=crm_smart
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+#### 5. Create Database
+```sql
+CREATE DATABASE crm_smart CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+#### 6. Migrasi Database
+```bash
+# Run migrations
+php artisan migrate
+
+# Seed sample data (user Sales & Manager)
+php artisan db:seed --class=UserSeeder
+```
+
+#### 7. Build Assets
+```bash
+# Development
+npm run dev
+
+# Production
+npm run build
+```
+
+#### 8. Run Application
+```bash
+php artisan serve
+```
+
+Akses aplikasi di: **http://127.0.0.1:8000**
+
+---
+
+## ⚙️ Konfigurasi
+
+### **Environment Variables:**
+
+```env
+# Application
+APP_NAME="CRM PT. Smart"
+APP_ENV=local
+APP_DEBUG=true
+APP_TIMEZONE=Asia/Jakarta
+APP_URL=http://127.0.0.1:8000
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=crm_smart
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Session
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+
+# Cache
+CACHE_STORE=database
+```
+
+### **Konfigurasi Timezone:**
+
+Di app.php:
+```php
+'timezone' => 'Asia/Jakarta',
+'locale' => 'id',
+```
+
+---
+
+##  User Testing
+
+### **Login Credentials:**
+
+| Role | Email | Password | Akses |
+|------|-------|----------|-------|
+| **Manager** | `manager@smart.com` | `password` | Full access (Leads, Projects, Customers, Products) |
+| **Sales A** | `sales@smart.com` | `password` | Leads only |
+| **Sales B** | `salesb@smart.com` | `password` | Leads only |
+
+### **Sample Data:**
+
+Setelah seeding, tersedia:
+- 2 User Manager
+- 2 User Sales
+- Sample data lead, project, customer (jika ditambahkan manual)
+
+---
+
+## Struktur MVC
+
+### **Model-View-Controller Pattern:**
+
+```
+app/
+├── Http/
+│   └── Controllers/
+│       ├── LeadController.php         # CRUD Leads
+│       ├── ProjectController.php      # CRUD Projects + Approve
+│       ├── CustomerController.php     # CRUD Customers + Convert
+│       ├── ProductController.php      # CRUD Products
+│       └── CustomerProductController.php  # Assign/Remove Produk
+│
+├── Models/
+│   ├── User.php                # User (Sales/Manager)
+│   ├── Lead.php                # Lead model + relasi
+│   ├── Project.php             # Project model + relasi
+│   ├── Customer.php            # Customer model + relasi
+│   ├── Product.php             # Product model + relasi
+│   └── CustomerProduct.php     # Pivot model (optional)
+│
+resources/
+└── views/
+    ├── leads/                  # Blade templates Leads
+    │   ├── index.blade.php
+    │   ├── create.blade.php
+    │   └── edit.blade.php
+    ├── projects/               # Blade templates Projects
+    ├── customers/              # Blade templates Customers
+    └── products/               # Blade templates Products
+```
+
+### **Request Flow:**
+
+```
+Browser Request
+    │
+    ▼
+routes/web.php (Define route)
+    │
+    ▼
+Middleware (auth, role check)
+    │
+    ▼
+Controller (Business logic)
+    │
+    ├─ Validation
+    ├─ Authorization
+    ├─ Model interaction
+    └─ Return view/redirect
+    │
+    ▼
+Model (Eloquent ORM)
+    │
+    ├─ Query database
+    ├─ Relations
+    └─ Return data
+    │
+    ▼
+View (Blade Template)
+    │
+    └─ Render HTML
+    │
+    ▼
+Response to Browser
+```
+
+---
+
+## 🔗 Database Relations
+
+### **1. One-to-Many (HasMany / BelongsTo)**
+
+#### User → Leads
+```php
+// User.php
+public function leads() {
+    return $this->hasMany(Lead::class, 'created_by');
+}
+
+// Lead.php
+public function creator() {
+    return $this->belongsTo(User::class, 'created_by');
+}
+```
+
+**Usage:**
+```php
+// Get semua lead milik user
+$user->leads;
+
+// Get creator dari lead
+$lead->creator->name;
+```
+
+---
+
+### **2. One-to-One**
+
+#### Lead → Project
+```php
+// Lead.php
+public function project() {
+    return $this->hasOne(Project::class);
+}
+
+// Project.php
+public function lead() {
+    return $this->belongsTo(Lead::class);
+}
+```
+
+**Usage:**
+```php
+// Get project dari lead
+$lead->project;
+
+// Get lead dari project
+$project->lead->name;
+```
+
+---
+
+### **3. Many-to-Many (BelongsToMany)**
+
+#### Customer ↔ Products
+```php
+// Customer.php
+public function products() {
+    return $this->belongsToMany(Product::class, 'customer_products')
+                ->withPivot('start_date', 'end_date', 'status')
+                ->withTimestamps();
+}
+
+// Product.php
+public function customers() {
+    return $this->belongsToMany(Customer::class, 'customer_products')
+                ->withPivot('start_date', 'end_date', 'status')
+                ->withTimestamps();
+}
+```
+
+**Usage:**
+```php
+// Assign produk ke customer
+$customer->products()->attach($productId, [
+    'start_date' => now(),
+    'status' => 'active'
+]);
+
+// Get produk customer dengan pivot data
+foreach ($customer->products as $product) {
+    echo $product->name;
+    echo $product->pivot->start_date;
+    echo $product->pivot->status;
+}
+
+// Remove produk
+$customer->products()->detach($productId);
+```
+
+---
+
+## 🔒 Security Features
+
+### **1. Authentication**
+- ✅ Laravel Breeze (session-based)
+- ✅ Password hashing (bcrypt)
+- ✅ Remember me functionality
+- ✅ Password reset via email
+
+### **2. Authorization**
+```php
+// Middleware auth di routes
+Route::middleware('auth')->group(function () {
+    Route::resource('leads', LeadController::class);
+});
+
+// Role check di controller
+if (!auth()->user()->isManager()) {
+    abort(403, 'Unauthorized');
+}
+
+// Policy-based authorization (optional)
+Gate::define('edit-lead', function ($user, $lead) {
+    return $user->id === $lead->created_by;
+});
+```
+
+### **3. CSRF Protection**
+```blade
+<form method="POST">
+    @csrf  <!-- Token CSRF otomatis -->
+    <!-- form fields -->
+</form>
+```
+
+### **4. Validation**
+```php
+$request->validate([
+    'name' => 'required|string|max:255',
+    'email' => 'required|email|unique:leads,email',
+    'phone' => 'required|string|max:20',
+]);
+```
+
+### **5. SQL Injection Prevention**
+- ✅ Eloquent ORM (prepared statements)
+- ✅ Query builder with parameter binding
+- ❌ Tidak ada raw query tanpa binding
+
+### **6. XSS Protection**
+```blade
+{{ $variable }}  <!-- Auto-escaped -->
+{!! $html !!}    <!-- Unescaped (hati-hati) -->
+```
+
+---
+
+## 🌐 API Endpoints
+
+### **Authentication**
+
+| Method | Endpoint | Aksi | Auth |
+|--------|----------|------|------|
+| GET | `/login` | Form login | Guest |
+| POST | `/login` | Process login | Guest |
+| POST | `/logout` | Logout | Auth |
+| GET | `/register` | Form register | Guest |
+| POST | `/register` | Process register | Guest |
+
+---
+
+### **Leads**
+
+| Method | Endpoint | Aksi | Role |
+|--------|----------|------|------|
+| GET | `/leads` | List leads | Sales, Manager |
+| GET | `/leads/create` | Form tambah | Sales, Manager |
+| POST | `/leads` | Simpan lead | Sales, Manager |
+| GET | `/leads/{id}/edit` | Form edit | Sales (own), Manager (all) |
+| PUT | `/leads/{id}` | Update lead | Sales (own), Manager (all) |
+| DELETE | `/leads/{id}` | Hapus lead | Manager |
+| POST | `/leads/{id}/approve` | Approve lead | Manager |
+| POST | `/leads/{id}/reject` | Reject lead | Manager |
+
+---
+
+### **Projects**
+
+| Method | Endpoint | Aksi | Role |
+|--------|----------|------|------|
+| GET | `/projects` | List projects | Manager |
+| GET | `/projects/create` | Form tambah | Manager |
+| POST | `/projects` | Simpan project | Manager |
+| DELETE | `/projects/{id}` | Hapus project | Manager |
+| POST | `/projects/{id}/approve` | Approve project | Manager |
+| POST | `/projects/{id}/reject` | Reject project | Manager |
+
+---
+
+### **Customers**
+
+| Method | Endpoint | Aksi | Role |
+|--------|----------|------|------|
+| GET | `/customers` | List customers | Manager |
+| GET | `/customers/create` | Form tambah | Manager |
+| POST | `/customers` | Simpan customer | Manager |
+| GET | `/customers/{id}` | Detail customer | Manager |
+| GET | `/customers/{id}/edit` | Form edit | Manager |
+| PUT | `/customers/{id}` | Update customer | Manager |
+| DELETE | `/customers/{id}` | Hapus customer | Manager |
+
+---
+
+### **Products**
+
+| Method | Endpoint | Aksi | Role |
+|--------|----------|------|------|
+| GET | `/products` | List products | Manager |
+| GET | `/products/create` | Form tambah | Manager |
+| POST | `/products` | Simpan product | Manager |
+| GET | `/products/{id}/edit` | Form edit | Manager |
+| PUT | `/products/{id}` | Update product | Manager |
+| DELETE | `/products/{id}` | Hapus product | Manager |
+
+---
+
+### **Customer Products (Assignment)**
+
+| Method | Endpoint | Aksi | Role |
+|--------|----------|------|------|
+| GET | `/customers/{id}/assign-product` | Form assign | Manager |
+| POST | `/customers/{customer}/products` | Assign produk | Manager |
+| DELETE | `/customers/{customer}/products/{product}` | Remove produk | Manager |
+
+------
+
+## 🐛 Troubleshooting
+
+### **1. Error: Class "App\Models\User" not found**
+```bash
+composer dump-autoload
+php artisan optimize:clear
+```
+
+### **2. Migration Error: Table already exists**
+```bash
+# Drop semua table & migrate ulang
+php artisan migrate:fresh
+
+# Dengan seeding
+php artisan migrate:fresh --seed
+```
+
+### **3. Error 403: Unauthorized**
+- Pastikan user sudah login
+- Cek role user di database (`users.role`)
+- Pastikan middleware `auth` terpasang di route
+
+### **4. CSS/JS tidak muncul**
+```bash
+# Development mode
+npm run dev
+
+# Production build
+npm run build
+php artisan optimize
+```
+
+### **5. Session expired terus**
+```env
+# Di .env
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+
+# Migrate session table
+php artisan session:table
+php artisan migrate
+```
+
+### **6. Error: Foreign key constraint fails**
+Pastikan urutan migration:
+1. `users`
+2. `leads`
+3. `products`
+4. `projects`
+5. `customers`
+6. `customer_products`
+
+Jika salah urutan, rename migration file sesuai timestamp.
+
+---
+
+**Tech Stack Documentation:**
+- Laravel: [laravel.com/docs](https://laravel.com/docs)
+- Tailwind CSS: [tailwindcss.com/docs](https://tailwindcss.com/docs)
+- MySQL: [dev.mysql.com/doc](https://dev.mysql.com/doc/)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
