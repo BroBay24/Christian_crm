@@ -1,4 +1,3 @@
-GitHub Copilot: 
 ```markdown
 #  CRM PT. Smart - Sales Management System
 
