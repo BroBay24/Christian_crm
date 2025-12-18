@@ -89,25 +89,21 @@
                                             {{ $lead->creator->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                            {{-- Sales hanya bisa edit lead milik sendiri --}}
+                                            {{-- Sales bisa edit lead milik sendiri --}}
                                             @if (auth()->user()->isSales())
-                                                <div class="flex items-center gap-2">
+                                                @if ($lead->created_by === auth()->id())
                                                     <a href="{{ route('leads.edit', $lead) }}" 
                                                        class="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
                                                         Edit
                                                     </a>
-                                                    <a href="{{ route('leads.create') }}" 
-                                                       class="bg-blue-600  text-white font-semibold py-1 px-3 rounded shadow">
-                                                        + Tambah Baru
-                                                    </a>
-                                                </div>
+                                                @endif
                                             @endif
 
                                             {{-- Manager bisa approve/reject dan hapus --}}
                                             @if (auth()->user()->isManager())
                                                 <div class="flex items-center gap-2">
                                                     <a href="{{ route('leads.edit', $lead) }}" 
-                                                       class="inline-block bg-yellow-500 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-3 rounded shadow">
+                                                       class="bg-yellow-400  text-gray-900 font-semibold py-1 px-3 rounded shadow">
                                                         Edit
                                                     </a>
 
@@ -128,7 +124,7 @@
                                                               class="inline-block">
                                                             @csrf
                                                             <button type="submit" 
-                                                                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded shadow"
+                                                                    class="bg-red-600 hover:bg-orange-700 text-white font-semibold py-1 px-3 rounded shadow"
                                                                     onclick="return confirm('Reject lead ini?')">
                                                                 Reject
                                                             </button>

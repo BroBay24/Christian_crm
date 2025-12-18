@@ -14,20 +14,10 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        // Sales hanya bisa lihat lead yang dia buat sendiri
-        // Manager bisa lihat semua lead
-        if ($user->isSales()) {
-            $leads = Lead::where('created_by', $user->id)
-                ->with('creator')
-                ->latest()
-                ->paginate(10);
-        } else {
-            $leads = Lead::with('creator')
-                ->latest()
-                ->paginate(10);
-        }
+        // Sales dan Manager bisa melihat semua lead untuk monitoring
+        $leads = Lead::with('creator')
+            ->latest()
+            ->paginate(10);
 
         return view('leads.index', compact('leads'));
     }
