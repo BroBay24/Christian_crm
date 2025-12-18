@@ -1,4 +1,4 @@
-```markdown
+<img width="5653" height="7756" alt="b inggris erd" src="https://github.com/user-attachments/assets/acd0a7c0-08fb-48fa-8645-cb45d3f22401" />```markdown
 #  CRM PT. Smart - Sales Management System
 
 Sistem Customer Relationship Management (CRM) untuk mengelola proses Sales dari Lead hingga Customer dengan assignment produk internet.
@@ -20,33 +20,8 @@ Sistem Customer Relationship Management (CRM) untuk mengelola proses Sales dari 
 - [Database Relations](#-database-relations)
 - [Security Features](#-security-features)
 - [API Endpoints](#-api-endpoints)
-- [Screenshots](#-screenshots)
 - [Troubleshooting](#-troubleshooting)
 - [Future Development](#-future-development)
-
----
-
-## Tentang Aplikasi
-
-**CRM PT. Smart** adalah aplikasi web untuk divisi Sales yang mengelola proses:
-- **Lead Management**: Sales menginput calon customer
-- **Project Management**: Manager meng-approve lead menjadi project
-- **Customer Management**: Project approved dikonversi menjadi customer aktif
-- **Product Assignment**: Assign paket internet ke customer
-
-### Kenapa Aplikasi Ini Dibuat?
-
-**Problem:**
-- Tracking lead masih manual (Excel)
-- Tidak ada sistem approval terstruktur
-- Sulit tracking produk yang digunakan customer
-- Tidak ada pembagian role Sales vs Manager
-
-**Solution:**
-- Web-based CRM dengan role management
-- Approval workflow otomatis
-- Database relasional untuk tracking lengkap
-- UI modern dan user-friendly
 
 ---
 
@@ -92,7 +67,8 @@ Sistem Customer Relationship Management (CRM) untuk mengelola proses Sales dari 
 
 ##  Database Schema (ERD)
 
-![Uploading b inggris erd.png…]()
+<img width="5653" height="7756" alt="b inggris erd" src="https://github.com/user-attachments/assets/7063a7eb-7676-4636-ba1d-ce9d0403eea9" />
+
 
 ### **Penjelasan Relasi:**
 
@@ -224,7 +200,7 @@ Edit file .env:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=crm_smart
+DB_DATABASE="DBKAMU"
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -277,7 +253,7 @@ APP_URL=http://127.0.0.1:8000
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=crm_smart
+DB_DATABASE="DBKAMU"
 DB_USERNAME=root
 DB_PASSWORD=
 
