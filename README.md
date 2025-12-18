@@ -1,4 +1,3 @@
-<img width="5653" height="7756" alt="b inggris erd" src="https://github.com/user-attachments/assets/acd0a7c0-08fb-48fa-8645-cb45d3f22401" />```markdown
 #  CRM PT. Smart - Sales Management System
 
 Sistem Customer Relationship Management (CRM) untuk mengelola proses Sales dari Lead hingga Customer dengan assignment produk internet.
