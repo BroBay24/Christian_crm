@@ -92,76 +92,7 @@ Sistem Customer Relationship Management (CRM) untuk mengelola proses Sales dari 
 
 ##  Database Schema (ERD)
 
-```mermaid
-erDiagram
-    USERS {
-        bigint id PK
-        string name
-        string email
-        string password
-        string role "sales | manager"
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    LEADS {
-        bigint id PK
-        string name
-        string company
-        string phone
-        string email
-        string status "new | approved | rejected"
-        bigint created_by FK
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    PRODUCTS {
-        bigint id PK
-        string name
-        string speed
-        decimal price
-        text description
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    PROJECTS {
-        bigint id PK
-        bigint lead_id FK
-        bigint approved_by FK
-        string status "pending | approved | rejected"
-        date approved_date
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    CUSTOMERS {
-        bigint id PK
-        bigint lead_id FK
-        date start_date
-        string status "active | inactive"
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    CUSTOMER_PRODUCTS {
-        bigint id PK
-        bigint customer_id FK
-        bigint product_id FK
-        date start_date
-        date end_date
-        string status "active | inactive"
-        timestamp created_at
-    }
-
-    USERS ||--o{ LEADS : "creates"
-    USERS ||--o{ PROJECTS : "approves"
-    LEADS ||--o| PROJECTS : "processed in"
-    LEADS ||--o| CUSTOMERS : "converted to"
-    CUSTOMERS ||--o{ CUSTOMER_PRODUCTS : "has"
-    PRODUCTS ||--o{ CUSTOMER_PRODUCTS : "used in"
-```
+![Uploading b inggris erd.png…]()
 
 ### **Penjelasan Relasi:**
 
